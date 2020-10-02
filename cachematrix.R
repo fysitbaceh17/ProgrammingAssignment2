@@ -7,7 +7,7 @@
 library(MASS)
 makeCacheMatrix <- function(x = matrix()) {
   j <- NULL                                  ##initializing inverse as NULL
-  set <- function(y){
+  set <- function(y){                        ##set the value of matrix
     x <<- y
     j <<- NULL
   }
@@ -15,7 +15,7 @@ makeCacheMatrix <- function(x = matrix()) {
   setInverse <- function(inverse) j <<- inverse
   getInverse <- function() j 
   list(set = set, get = get, 
-       setInverse = setInverse, 
+       setInverse = setInverse,             ##set the value of inverse
        getInverse = getInverse)             ##function to obtain inverse of matrix
 }
 
@@ -24,10 +24,10 @@ cacheSolve <- function(x, ...) {
   j <- x$getInverse()                     ##return inverse value
   if(!is.null(j)){
     message("getting cached data")
-    return(j)
+    return(j)                            ##return the inverse
   }
   mat <- x$get()
   j <- solve(mat,...)                     ##calculate inverse value
   x$setInverse(j)
-  j
+  j                                       ##returns the inverse
 }
